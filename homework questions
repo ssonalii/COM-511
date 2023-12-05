@@ -1,0 +1,513 @@
+#q1
+#1. WAP to perform following operation a string:   1. find the length     2. lowercase the string    3. uppercase the string    
+# 4. slicing method    5. find the index of character from the string      6. count a character’s occurrence
+str1 = "This is a string"
+
+# 1. Find the length of the string
+str_len = len(str1)
+print("Length of the string:", str_len)
+
+# 2. Convert the string to lowercase
+str_lower = str1.lower()
+print("Lowercase string:", str_lower)
+
+# 3. Convert the string to uppercase
+str_upper = str1.upper()
+print("Uppercase string:", str_upper)
+
+# 4. Extract a substring using slicing
+str_slice = str1[2:5]
+print("Sliced string:", str_slice)
+
+# 5. Find the index of a character in the string
+char_index = str1.find("s")
+print("Index of character 's':", char_index)
+
+# 6. Count the number of occurrences of a character in the string
+char_count = str1.count("i")
+print("Count of character 'i':", char_count)
+
+
+#q2
+ WAP to swap two numbers by using bitwise without 3rd operator in python
+def swap_numbers(a, b):
+  """
+  Swap two numbers using bitwise operations and without using a third variable.
+
+  Args:
+    a: The first number.
+    b: The second number.
+
+  Returns:
+    a: The second number after swapping.
+    b: The first number after swapping.
+  """
+  a ^= b
+  b ^= a
+  a ^= b
+  return a, b
+
+# Example usage
+a = 5
+b = 10
+
+a, b = swap_numbers(a, b)
+
+print(f"a: {a}, b: {b}")
+
+#q3
+WAP toggle the Kth bit by using bitwise operator in python
+def toggle_bit(n, k):
+  """
+  Toggles the Kth bit of a number n.
+
+  Args:
+    n: The number to toggle the bit in.
+    k: The bit position (0-based indexing) to toggle.
+
+  Returns:
+    The number with the Kth bit toggled.
+  """
+  # Create a mask with only the Kth bit set to 1.
+  mask = 1 << k
+
+  # XOR the number with the mask to toggle the Kth bit.
+  toggled_n = n ^ mask
+
+  return toggled_n
+
+# Example usage
+n = 5
+k = 2
+
+toggled_n = toggle_bit(n, k)
+
+print(f"Number before toggling: {n}, Kth bit: {n & (1 << k)}")
+print(f"Number after toggling: {toggled_n}, Kth bit: {toggled_n & (1 << k)}")
+
+#q4
+WAP to unset the rightmost set bit by bit manipulation in python
+def unset_rightmost_bit(n):
+  mask = ~n >> 1
+  return n & mask
+
+# Example usage
+n = 13
+print(f"Original number: {n}, binary representation: {bin(n)}")
+unset = unset_rightmost_bit(n)
+print(f"Number after unset: {unset}, binary representation: {bin(unset)}")
+
+#q5
+WAP to unset the rightmost set bit by bit manipulation in python
+def unset_rightmost_bit_xor(n):
+  complement = ~n
+  rightmost_set = n & complement
+  unset = n ^ rightmost_set
+  return unset
+
+# Example usage
+n = 13
+print(f"Original number: {n}, binary representation: {bin(n)}")
+unset = unset_rightmost_bit_xor(n)
+print(f"Number after unset: {unset}, binary representation: {bin(unset)}")
+
+#q6
+WAP to convert lowercase character to uppercase using bit opertaor in python
+def lowercase_to_uppercase(char):
+  """
+  Converts a lowercase character to uppercase using bitwise operations.
+
+  Args:
+    char: The lowercase character to convert.
+
+  Returns:
+    The uppercase equivalent of the character.
+  """
+  # Check if the character is lowercase
+  if ord('a') <= ord(char) <= ord('z'):
+    # XOR with 32 to flip the 6th bit (case bit)
+    return chr(ord(char) ^ 32)
+  else:
+    # Not a lowercase character, return the original character
+    return char
+
+# Example usage
+char = 'a'
+uppercase_char = lowercase_to_uppercase(char)
+
+print(f"Lowercase character: '{char}', Uppercase character: '{uppercase_char}'")
+
+#q7
+ Write a program to find area parameter of circle square and rectangle by user choice in python
+def calculate_area_perimeter(shape):
+  """
+  Calculates the area and perimeter of a given shape based on user input.
+
+  Args:
+    shape: The chosen shape (circle, square, or rectangle).
+
+  Returns:
+    A tuple containing the area and perimeter of the shape.
+  """
+  if shape.lower() == "circle":
+    radius = float(input("Enter the radius of the circle: "))
+    area = 3.14 * radius**2
+    perimeter = 2 * 3.14 * radius
+  elif shape.lower() == "square":
+    side_length = float(input("Enter the side length of the square: "))
+    area = side_length**2
+    perimeter = 4 * side_length
+  elif shape.lower() == "rectangle":
+    length = float(input("Enter the length of the rectangle: "))
+    breadth = float(input("Enter the breadth of the rectangle: "))
+    area = length * breadth
+    perimeter = 2 * (length + breadth)
+  else:
+    print("Invalid shape! Please enter 'circle', 'square', or 'rectangle'.")
+    return None, None
+
+  return area, perimeter
+
+# Get user input for the shape
+shape_choice = input("Enter the shape (circle, square, or rectangle): ")
+
+# Calculate and display area and perimeter
+area, perimeter = calculate_area_perimeter(shape_choice)
+
+if area is not None and perimeter is not None:
+  print(f"Area of {shape_choice}: {area:.2f}")
+  print(f"Perimeter of {shape_choice}: {perimeter:.2f}")
+
+#q8
+Rupal has a huge collection of country stamps. She decided to count the total number of distinct country stamps in her collection. She asked for your help. You pick the stamps one by one from a stack of country stamps. Find the total number of distinct country stamps? in python
+def count_distinct_stamps(stamps):
+  """
+  Counts the total number of distinct country stamps in a collection.
+
+  Args:
+    stamps: A list of country stamps (strings).
+
+  Returns:
+    The total number of distinct country stamps.
+  """
+  # Create an empty set to store distinct stamps
+  distinct_stamps = set()
+
+  # Add each stamp to the set if it's not already present
+  for stamp in stamps:
+    distinct_stamps.add(stamp)
+
+  # Return the size of the set (number of distinct stamps)
+  return len(distinct_stamps)
+
+# Example usage
+stamps = ["India", "USA", "China", "India", "France", "UK", "China", "Japan", "India"]
+
+distinct_count = count_distinct_stamps(stamps)
+
+print(f"Rupal has a total of {distinct_count} distinct country stamps in her collection!")
+
+#q9
+wap to print the following pattern
+    * * *
+    * * *
+    * * *
+for _ in range(3): # loop three times
+  print("* * *") # print the desired pattern on each iteration
+
+# Alternatively, one-liner using list comprehension and string join
+print("* * *\n" * 3)
+
+#q10
+WAP to calculate area of circle then inherit it to find area and volume of cylinder in python
+class Shape:
+  """
+  Base class for shapes with area calculation functionality.
+  """
+  def __init__(self):
+    pass
+
+  def area(self):
+    raise NotImplementedError("Area calculation not implemented for this shape.")
+
+class Circle(Shape):
+  """
+  Class representing a circle with area calculation.
+  """
+  def __init__(self, radius):
+    self.radius = radius
+
+  def area(self):
+    return 3.14 * self.radius**2
+
+class Cylinder(Circle):
+  """
+  Class representing a cylinder inheriting from Circle and adding height for volume calculation.
+  """
+  def __init__(self, radius, height):
+    super().__init__(radius)
+    self.height = height
+
+  def area(self):
+    # Inherited area calculation from Circle
+    return super().area()
+
+  def volume(self):
+    return self.area() * self.height
+
+# Example usage
+circle = Circle(5)
+cylinder = Cylinder(5, 10)
+
+print(f"Area of circle: {circle.area()}")
+print(f"Area of cylinder: {cylinder.area()}")
+print(f"Volume of cylinder: {cylinder.volume()}")
+
+#q11
+find runner up score in a list in python
+def runner_up_loop(scores):
+  highest = None
+  second_highest = None
+  for score in scores:
+    if highest is None or score > highest:
+      highest = score
+    elif second_highest is None or score > second_highest:
+      second_highest = score
+  return second_highest
+
+# Example usage
+scores = [5, 8, 2, 6, 8, 5, 8, 7]
+runner_up = runner_up_loop(scores)
+print(f"Runner-up score: {runner_up}")
+
+#q12
+ merge two dictonaries in python
+dict1 = {"name": "John", "age": 30}
+dict2 = {"job": "Engineer", "city": "New York"}
+
+merged_dict = dict(**dict1, **dict2)
+
+print(merged_dict)  # Output: {'name': 'John', 'age': 30, 'job': 'Engineer', 'city': 'New York'}
+
+#q12
+find longest word in the list in python
+def longest_word(words):
+  longest = ""
+  for word in words:
+    if len(word) > len(longest):
+      longest = word
+  return longest
+
+# Example usage
+words = ["apple", "banana", "orange", "pineapple", "mango"]
+longest = longest_word(words)
+
+print(f"Longest word: {longest}")
+
+#q13
+ WAP to swap two numbers without using temp variable in python
+def swap_numbers_xor(a, b):
+  """Swaps two numbers using bitwise XOR without a temporary variable."""
+  a ^= b
+  b ^= a
+  a ^= b
+  return a, b
+
+# Example usage
+a = 5
+b = 10
+
+a, b = swap_numbers_xor(a, b)
+
+print(f"a: {a}, b: {b}")
+
+#q14
+WAP to build a mini calculator in python
+def calculate():
+  """
+  Performs a basic calculation based on user input.
+  """
+  # Get user input for numbers and operation
+  num1 = float(input("Enter first number: "))
+  operator = input("Enter operator (+, -, *, /): ")
+  num2 = float(input("Enter second number: "))
+
+  # Handle valid operations
+  if operator == "+":
+    result = num1 + num2
+  elif operator == "-":
+    result = num1 - num2
+  elif operator == "*":
+    result = num1 * num2
+  elif operator == "/":
+    if num2 == 0:
+      print("Division by zero is not allowed!")
+      return
+    else:
+      result = num1 / num2
+  else:
+    print(f"Invalid operator: {operator}")
+    return
+
+  # Display the result
+  print(f"Result: {num1} {operator} {num2} = {result}")
+
+# Ask user if they want to continue
+while True:
+  calculate()
+  answer = input("Continue calculating? (y/n): ")
+  if answer.lower() != "y":
+    break
+
+print("Thank you for using the mini calculator!")
+
+#q15
+String Slicing and string operations in python
+# Using slice()
+
+s = 'Hello, World!'
+slice_object = slice(0,5) # creates a slice object for slicing
+print(s[slice_object]) # prints 'Hello'
+
+# Using array slicing
+
+s = 'Hello, World!'
+print(s[0:5]) # prints 'Hello'
+
+#q16
+Perform Following operations on matrix    i. Iterate each element     ii. Add each element    iii. Add even numbers in the matrix   iv. Add numbers on even indexes
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [10,11,12]
+]
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [10,11,12]
+]
+
+# i. Iterate each element
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+
+# ii. Add each element
+total_sum = 0
+for row in matrix:
+    for element in row:
+        total_sum += element
+
+print(f"Sum of all elements: {total_sum}")
+
+# iii. Add even numbers
+even_sum = 0
+for row in matrix:
+    for element in row:
+        if element % 2 == 0:
+            even_sum += element
+
+print(f"Sum of even numbers: {even_sum}")
+
+# iv. Add numbers on even indexes
+even_index_sum = 0
+for i, row in enumerate(matrix):
+    for j, element in enumerate(row):
+        if i % 2 == 0 and j % 2 == 0:
+            even_index_sum += element
+
+print(f"Sum of numbers on even indexes: {even_index_sum}")
+ #q17
+ WAP to unset the rightmost set bit by bit manipulation in python
+def unset_rightmost_set_bit(n):
+  """Unsets the rightmost set bit of a number using AND, NOT, and OR."""
+  return n | (~n & (n - 1))
+
+# Example usage
+number = 10  # Binary representation: 1010
+unset_bit = unset_rightmost_set_bit(number)
+print(f"Original number: {number}, binary: {bin(number)}")
+print(f"Unset rightmost bit: {unset_bit}, binary: {bin(unset_bit)}")
+
+#q18
+ WAP to find whether a string contains vowels or not in python
+def has_vowels(text):
+  """
+  Checks if a string contains any vowels (a, e, i, o, u).
+
+  Args:
+    text: The string to be checked.
+
+  Returns:
+    True if the string contains at least one vowel, False otherwise.
+  """
+  vowels = "aeiou"
+  for char in text.lower():
+    if char in vowels:
+      return True
+  return False
+
+# Example usage
+string1 = "This string has vowels."
+string2 = "Ths sng hs n vwls."
+
+print(f"'{string1}' has vowels: {has_vowels(string1)}")
+print(f"'{string2}' has vowels: {has_vowels(string2)}")
+
+#q19
+WAP to count the number of vowels in python
+def count_vowels(text):
+  """
+  Counts the number of vowels (a, e, i, o, u) in a string.
+
+  Args:
+    text: The string to be analyzed.
+
+  Returns:
+    The number of vowels found in the string.
+  """
+  vowels = "aeiou"
+  vowel_count = 0
+  for char in text.lower():
+    if char in vowels:
+      vowel_count += 1
+  return vowel_count
+
+# Example usage
+string1 = "This string has 5 vowels."
+string2 = "Ths sng hs n vwls."
+
+print(f"'{string1}' has {count_vowels(string1)} vowels.")
+print(f"'{string2}' has {count_vowels(string2)} vowels.")
+
+#q20
+Given a list, the task is to write a Python Program to find the Index containing String?
+def find_index(string, list1):
+  """
+  Finds the index of a string in a list.
+
+  Args:
+    string: The string to search for.
+    list1: The list to search in.
+
+  Returns:
+    The index of the string in the list, or -1 if not found.
+  """
+  for i, item in enumerate(list1):
+    if item == string:
+      return i
+  return -1
+
+# Example usage
+list1 = ["apple", "banana", "cherry", "orange", "mango"]
+string = "orange"
+index = find_index(string, list1)
+
+if index != -1:
+  print(f"String '{string}' found at index {index} in the list.")
+else:
+  print(f"String '{string}' not found in the list.")
+
