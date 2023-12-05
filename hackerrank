@@ -1,0 +1,57 @@
+#1. Reverse Words in a Sentence
+def reverse_words(sentence):
+
+    words = sentence.split()
+
+    reversed_sentence = ' '.join(reversed(words))
+
+    return reversed_sentence
+  #2. Maximum Subarray Sum
+def max_subarray_sum(arr):     
+max_sum = arr[0]     
+current_sum = arr[0]     
+for i in range(1, len(arr)):         
+current_sum = max(arr[i], current_sum + arr[i])         
+max_sum = max(max_sum, current_sum)     
+return max_sum
+
+  #3. Merge Intervals
+def merge_intervals(intervals):     
+intervals.sort(key=lambda x: x[0])     
+merged = []     
+for interval in intervals:         
+if not merged or merged[-1][1] < interval[0]:             
+merged.append(interval)         
+else:             
+merged[-1][1] = max(merged[-1][1], interval[1])     
+return merged
+  #4.Given an integer,n, perform the following conditional actions:
+
+If n is odd, print Weird
+If n is even and in the inclusive range of 2 to 5, print Not Weird
+If n is even and in the inclusive range of 6 to 20, print Weird
+If n is even and greater than 20, print Not Weird
+if __name__ == '__main__':
+    n = int(input().strip())
+if n%2 != 0:
+    print("Weird")
+elif n%2 == 0 and n>2 and n<=5:
+    print("Not Weird")
+elif n%2 ==0 and n > 6 and n <=20:
+    print("Weird")
+else:
+    print("Not Weird")
+   #5.You are given a string S and width w.Your task is to wrap the string into a paragraph of width w.
+import textwrap
+
+def wrap(string, max_width):
+    for i in range(0,len(string)+1,max_width):
+        result = string[i:i+max_width]
+        if len(result) == max_width:
+            print(result)
+        else:
+            return(result)
+if __name__ == '__main__':
+    string, max_width = input(), int(input())
+    result = wrap(string, max_width)
+    print(result)
