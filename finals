@@ -1,0 +1,808 @@
+Create an Empty List ‘L’,and move all zero digits to the end (or Right side)of a given list of numbers.Print empty list if list size is zero, Otherwise Print list after segregation. Input Format : First line , List size Next lines , List Elements Output Format : Print list after segregation Constraints: List size > 0
+def move_zeros_to_end(list1):
+    """Moves all zero digits to the end of the given list.
+
+    Args:
+        list1: The list to modify.
+
+    Returns:
+        The modified list with zero digits at the end.
+    """
+
+    L = []  # Create an empty list
+
+    if len(list1) == 0:
+        return L  # Return empty list if input list is empty
+
+    for i in list1:
+        if i != 0:
+            L.append(i)
+
+    L.extend([0] * list1.count(0))  # Add zeros to the end efficiently
+
+    return L
+
+# Get input from the user
+list_size = int(input("Enter the size of the list: "))
+
+if list_size <= 0:
+    print("Invalid list size. Size must be greater than 0.")
+else:
+    # Create the list
+    list1 = []
+    for i in range(list_size):
+        list1.append(int(input(f"Enter element {i+1}: ")))
+
+    # Move zeros to the end and print the result
+    result = move_zeros_to_end(list1)
+    print("List after segregation:", result)
+=====================================================
+You are given a list N integers,and an integer M.Print all the elements of the list as square of 
+elements are divisible of M
+and cude of elements which are not divisible by M.
+Input format : 
+Line 1 , List size 
+
+Line 2 , List elements
+Line 3 , Integer 'M'
+Output format : 
+Print output
+Constraints: 
+NA
+Example: 
+Input :
+size = 5
+list=1 2 3 4 5
+M=3
+Output:
+1 8 9 64 125
+def process_list(list1, M):
+    """Processes the list, printing squares of divisible elements and cubes of non-divisible elements.
+
+    Args:
+        list1: The list of integers.
+        M: The integer for divisibility check.
+    """
+
+    for num in list1:
+        if num % M == 0:
+            print(num**2, end=" ")  # Print square if divisible
+        else:
+            print(num**3, end=" ")  # Print cube if not divisible
+
+# Get input from the user
+list_size = int(input("Enter the size of the list: "))
+list1 = list(map(int, input("Enter the list elements separated by spaces: ").split()))
+M = int(input("Enter the integer M: "))
+
+# Process and print the list
+process_list(list1, M)
+===========================================================
+Write a program to replace first occurrence of sub-string in string. Constraints: I/p: First line reads the string Second line reads the sub-string s1 Third line reads the new sub-string(s2) which has to be replaced. O/p: Prints the modified string Example: I/p: Hello students Hello Hi O/p: Hi students
+
+original_string = input("Enter the string: ")
+substring_to_replace = input("Enter the substring to replace: ")
+new_substring = input("Enter the new substring: ")
+
+# Find the index of the first occurrence of the substring
+index = original_string.find(substring_to_replace)
+
+# Replace the substring with the new substring
+modified_string = original_string[:index] + new_substring + original_string[index + len(substring_to_replace):]
+
+print("Modified string:", modified_string)
+========================================================
+A permutation is simply a re-arrangement of the elements in different possible orders. Strings are made up of characters. Permutation of a string will be the set of all possible ways in which the order of the characters of the string can be changed. Print different permutations of a given string Input: Line 1: input string Output: Line 1:strings with different possibilities in new lines Constraints: 0 <= s.length <= 500000 String contains unique elements. Example: Input : str = 'ABC' Output : ABC        ACB        BAC        BCA        CAB        CBA Explanation: Using in built function permutations(iterable)
+
+import itertools
+
+def print_permutations(string):
+    """Prints different permutations of the given string.
+
+    Args:
+        string: The input string.
+    """
+
+    permutations = itertools.permutations(string)  # Generate permutations
+    for permutation in permutations:
+        print("".join(permutation))  # Print each permutation
+
+# Get input from the user
+input_string = input("Enter the string: ")
+
+# Print permutations
+print_permutations(input_string)
+============================================
+Honey is given with a collection of n strings in which some strings are of repeating nature but he has been given with a number k. His task is to find the kth unique string. Also before finding the kth unique string he has to sort each individual string beforehand. If there are fewer unique strings than k print -1. As his best friend, your task is to help Ashish in accomplishing the task. Input Format • The first line contains an integer n denoting the number of strings. • The next n lines contain strings. • The next line contains an integer k. Output Format The output contains the kth distinct string. Constraints: • 1<=n<=105 • -100<=arr[i]<=100 Example: Input: 6 d b c b c a 2 Output: a Explanation: The only strings in arr that are distinct are "d" and "a." The letter "d" comes first, making it the first separate string. Because "a" appears second, it is the second distinct string. "a" is returned since k == 2
+
+def find_kth_unique_string(strings, k):
+    """Finds the kth unique string in the given collection, sorting each string beforehand.
+
+    Args:
+        strings: A list of strings.
+        k: The desired index of the unique string.
+
+    Returns:
+        The kth unique string, or -1 if there are fewer than k unique strings.
+    """
+
+    unique_strings = set()  # Use a set to store unique strings efficiently
+    for string in strings:
+        sorted_string = "".join(sorted(string))  # Sort each string
+        unique_strings.add(sorted_string)  # Add to set to ensure uniqueness
+
+    unique_strings = list(unique_strings)  # Convert set to list for indexing
+    unique_strings.sort()  # Sort the unique strings alphabetically
+
+    if k > len(unique_strings):
+        return -1  # Not enough unique strings
+    else:
+        return unique_strings[k - 1]  # Return the kth unique string (indexing starts from 0)
+
+# Get input from the user
+n = int(input("Enter the number of strings: "))
+strings = []
+for i in range(n):
+    strings.append(input(f"Enter string {i+1}: "))
+k = int(input("Enter the value of k: "))
+
+# Find and print the kth unique string
+result = find_kth_unique_string(strings, k)
+print("Kth unique string:", result)
+
+=============================================================
+Program that takes the 3 numbers and finds the largest number Aamong three numbers. Constraints: The program assumes that the input numbers are integers between in range 1 to 10^3. Example: Input: 15 12 33 Output: The 3rd Number is the greatest among three. input 1: 33 15 12 output 1: The 1st Number is the greatest among three. input 2: 15 33 12 output 2: The 2nd Number is the greatest among three Explanation: 1. Take the three numbers as input and store them in variables. 2. Check the first number if it is greater than other two. 3. Repeat the step 2 for other two numbers. 4. Print the number which is greater among all and exit
+
+num1 = int(input("Enter the first number: "))
+num2 = int(input("Enter the second number: "))
+num3 = int(input("Enter the third number: "))
+
+if not 1 <= num1 <= 10**3 or not 1 <= num2 <= 10**3 or not 1 <= num3 <= 10**3:
+    print("Invalid input. Numbers must be between 1 and 10^3.")
+else:
+    if num1 > num2 and num1 > num3:
+        print("The 1st Number is the greatest among three.")
+    elif num2 > num1 and num2 > num3:
+        print("The 2nd Number is the greatest among three.")
+    else:
+        print("The 3rd Number is the greatest among three.")
+
+==================================
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers. Given a string s, return true if it is a palindrome, or false otherwise. Input String output boolean Constraints: • 1 <= s.length <= 2 * 105 • s consists only of printable ASCII characters. Example: Example 1: Input: s = "A man, a plan, a canal: Panama" Output: true Explanation: "amanaplanacanalpanama" is a palindrome. Example 2: Input: s = "race a car" Output: false Explanation: "raceacar" is not a palindrome. Example 3: Input: s = " " Output: true Explanation: s is an empty string "" after removing non-alphanumeric characters. Since an empty string reads the same forward and backward, it is a palindrome.
+
+def is_palindrome(s):
+    """Checks if a string is a palindrome, ignoring non-alphanumeric characters and case.
+
+    Args:
+      s: The string to check.
+
+    Returns:
+      True if the string is a palindrome, False otherwise.
+    """
+
+    # Lowercase the string and remove non-alphanumeric characters
+    clean_str = "".join(char.lower() for char in s if char.isalnum())
+
+    # Check if the cleaned string is the same forward and backward
+    return clean_str == clean_str[::-1]
+
+# Example usage
+s1 = "A man, a plan, a canal: Panama"
+s2 = "race a car"
+s3 = " "
+
+print(f"Is '{s1}' a palindrome? {is_palindrome(s1)}")
+print(f"Is '{s2}' a palindrome? {is_palindrome(s2)}")
+print(f"Is '{s3}' a palindrome? {is_palindrome(s3)}")
+
+=======================================================
+Write a function that finds the sum of proper divisors of a number. Proper divisors of a number are those numbers by which the number is divisible, except the number itself. Constraints: num>0 Example: proper divisors of 36 are 1, 2, 3, 4, 6, 9, 18 . sum of divisors 55. Explanation: 1.write a function that accept a integer. 2.take a empty list. 3.run a loop to check wheather the given num is a proper divisor or not. 4.now add that proper divisor to list. 5.find the sum of the list. 6.return the sum.
+
+def sum_proper_divisors(num):
+    """Calculates the sum of proper divisors of a positive integer.
+
+    Args:
+      num: The positive integer whose proper divisors are to be summed.
+
+    Returns:
+      The sum of all proper divisors of the given number.
+
+    Raises:
+      ValueError: If the input number is not positive.
+    """
+
+    if num <= 0:
+        raise ValueError("Number must be positive.")
+
+    divisors_sum = 1  # Include 1 as a divisor
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            divisors_sum += i + num // i  # Add both divisor and its complement
+    return divisors_sum - num  # Exclude the number itself
+
+# Example usage
+numbers = [6, 12, 28]
+for num in numbers:
+    print(f"Sum of proper divisors of {num}: {sum_proper_divisors(num)}")
+
+==========================================
+You are tasked with writing a function to calculate the factorial of a non-negative integer n. The factorial of a number n is the product of all positive integers less than or equal to n. It is denoted by n! and is defined as: n!=n×(n−1)×(n−2)×…×2×1 Write a function to calculate the factorial of a non-negative integer n where 0≤n≤20. Ensure that your solution runs in O(n) time complexity and uses O(1) space. If n is negative then print -1. Constraints: 1. Input Limits: ◦ The input number is within a specific range, e.g., 0 to 20. 1. Output Limits: ◦ The result should fit within a certain data type (e.g., 32-bit integer). 1. Time Complexity: ◦ Your solution must execute within a specified time limit, such as O(n), where n is the input number. 1. Space Complexity: ◦ There may be restrictions on the amount of memory your solution can use, expressed in terms of space complexity. Example: I/p: 5 O/p: 120 Explanation: For n=5 Logic is 5*4*3*2*1 So it is 120
+
+def factorial(n):
+    """Calculates the factorial of a non-negative integer n.
+
+    Args:
+        n: The non-negative integer for which to calculate the factorial.
+
+    Returns:
+        The factorial of n, or -1 if n is negative.
+    """
+
+    if n < 0:
+        return -1
+    elif n == 0:
+        return 1  # Base case: factorial of 0 is 1
+    else:
+        fact = 1
+        for i in range(2, n + 1):
+            fact *= i  # Iteratively multiply numbers from 2 to n
+        return fact
+
+# Example usage
+num = int(input("Enter a non-negative integer: "))
+result = factorial(num)
+print(f"Factorial of {num}: {result}")
+
+=================================================
+Write a program to print n non composite numbers after nth Prime number.
+
+def is_prime(n):
+    """Checks if a number is prime."""
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def find_nth_prime(n):
+    """Finds the nth prime number."""
+    count = 0
+    prime = 2
+    while count < n:
+        prime += 1
+        if is_prime(prime):
+            count += 1
+    return prime
+
+def print_non_composite_after_nth_prime(n, num_to_print):
+    """Prints n non-composite numbers after the nth prime number."""
+    nth_prime = find_nth_prime(n)
+    count = 0
+    current_num = nth_prime + 1
+    while count < num_to_print:
+        if is_prime(current_num):
+            print(current_num)
+            count += 1
+        current_num += 1
+
+# Get input from the user
+n = int(input("Enter the value of n: "))
+num_to_print = int(input("Enter the number of non-composite numbers to print: "))
+
+# Print the required numbers
+print_non_composite_after_nth_prime(n, num_to_print)
+
+===========================================
+Write a program to convert a given binary number into an equivalent decimal number ? Constraints: Binary number must be of 8 digits or below. if the length of the binary number is greater than 8 it must return Invalid. Example: input: 10101010 output: 170 input 1: 1010101010 output 1: Invalid Explanation: for input1 : the decimal form of binary number 10101010 is 170. for input 2: the given binary number has length of 10 digits. So,it's output is "Invalid"
+
+def binary_to_decimal(binary_num):
+    """Converts a binary number to its decimal equivalent.
+
+    Args:
+        binary_num: The binary number as a string.
+
+    Returns:
+        The decimal equivalent of the binary number, or "Invalid" if the input is invalid.
+    """
+
+    if len(binary_num) > 8:
+        return "Invalid"  # Check for constraint
+
+    decimal_value = 0
+    for i, digit in enumerate(binary_num[::-1]):  # Iterate from right to left
+        if digit not in "01":
+            return "Invalid"  # Check for non-binary digits
+        decimal_value += int(digit) * 2**i  # Multiply digit by 2 raised to its position
+    return decimal_value
+
+# Get input from the user
+binary_number = input("Enter a binary number (8 digits or less): ")
+
+# Convert and print the result
+decimal_number = binary_to_decimal(binary_number)
+print(decimal_number)
+
+===============================================
+Write a programm to print all natural numbers between given range using recursive function . Constraints: I/P: First line reads lower limit Second line reads upper limit O/p: print the natural numbers in a line seperated by space. Example: input: 1 5 output: 1 2 3 4 5 Explanation: Base condition of recursive function to print natural numbers is loweLimit < upperLimit. Which is our required condition to return control from function. After checking base condition print the value of lowerLimit and make a recursive call to printNaturalNumbers() function i.e. printNaturalNumbers(lowerLimit + 1, upperLimit);.
+
+def print_natural_numbers(lower_limit, upper_limit):
+  """
+  Prints all natural numbers between a given range using recursion.
+
+  Args:
+    lower_limit: The lower limit of the range (inclusive).
+    upper_limit: The upper limit of the range (inclusive).
+  """
+
+  # Base case: stop recursion when reaching upper limit
+  if lower_limit > upper_limit:
+    return
+
+  # Print current number and call recursively with incremented lower limit
+  print(lower_limit, end=" ")
+  print_natural_numbers(lower_limit + 1, upper_limit)
+
+# Get input from the user (optional)
+# lower_limit = int(input("Enter the lower limit: "))
+# upper_limit = int(input("Enter the upper limit: "))
+
+# Example usage
+lower_limit = 1
+upper_limit = 5
+print_natural_numbers(lower_limit, upper_limit)
+
+=======================================================
+Write a recursive function to generate nth fibonacci term . Constraints: • 1 <= n <= 102 Example: input: 10 output: 55 Explanation: The recursive function to find nth Fibonacci term is based on below three conditions. 1. If num == 0 then return 0. Since Fibonacci of 0th term is 0. 2. If num == 1 then return 1. Since Fibonacci of 1st term is 1. 3. If num > 1 then return fibo(num - 1) + fibo(n-2). Since Fibonacci of a term is sum of previous two terms. in given example the 10th term fibonacci is 55.
+
+def fibonacci(n):
+ """
+ Calculates the nth Fibonacci term using recursion.
+
+ Args:
+   n: The desired Fibonacci term index (1 <= n <= 10^2).
+
+ Returns:
+   The nth Fibonacci term.
+ """
+
+ # Base cases: first two terms
+ if n == 0:
+   return 0
+ elif n == 1:
+   return 1
+
+ # Recursive case: sum of previous two terms
+ else:
+   return fibonacci(n-1) + fibonacci(n-2)
+
+# Example usage
+n = 10
+fibonacci_term = fibonacci(n)
+print(f"The {n}th Fibonacci term is: {fibonacci_term}")
+
+============================
+You have n super washing machines on a line. Initially, each washing machine has some dresses or is empty. For each move, you could choose any m (1 <= m <= n) washing machines, and pass one dress of each washing machine to one of its adjacent washing machines at the same time. Given an integer array machines representing the number of dresses in each washing machine from left to right on the line, return the minimum number of moves to make all the washing machines have the same number of dresses. If it is not possible to do it, return -1. Example 1: Input: machines = [1,0,5] Output: 3 Explanation: 1st move: 1 0 <-- 5 => 1 1 4 2nd move: 1 <-- 1 <-- 4 => 2 1 3 3rd move: 2 1 <-- 3 => 2 2 2 Example 2: Input: machines = [0,3,0] Output: 2 Explanation: 1st move: 0 <-- 3 0 => 1 2 0 2nd move: 1 2 --> 0 => 1 1 1 Example 3: Input: machines = [0,2,0] Output: -1 Explanation: It's impossible to make all three washing machines have the same number of dresses. Constraints: • n == machines.length • 1 <= n <= 104 • 0 <= machines[i] <= 105 Example: Example 1: Input: machines = [1,0,5] Output: 3 Explanation: 1st move: 1 0 <-- 5 => 1 1 4 2nd move: 1 <-- 1 <-- 4 => 2 1 3 3rd move: 2 1 <-- 3 => 2 2 2
+
+def find_min_moves(machines):
+    """Finds the minimum number of moves to make all washing machines have the same number of dresses.
+
+    Args:
+        machines: An array representing the number of dresses in each washing machine.
+
+    Returns:
+        The minimum number of moves required, or -1 if it's not possible.
+    """
+
+    n = len(machines)
+    total_dresses = sum(machines)
+    avg_dresses = total_dresses // n  # Target dresses per machine
+
+    if total_dresses % n != 0:
+        return -1  # Not possible if total dresses is not divisible by n
+
+    moves = 0
+    for i in range(n):
+        # Calculate the difference between current and target dresses
+        difference = machines[i] - avg_dresses
+
+        # Distribute the difference to the left and right neighbors
+        moves += abs(difference)  # Count absolute difference as moves
+        machines[(i + 1) % n] += difference  # Wrap around for circular distribution
+        machines[(i - 1 + n) % n] -= difference  # Handle negative difference
+
+    return moves
+
+# Example usage
+machines = [1, 0, 5]
+result = find_min_moves(machines)
+print(result)  # Output: 3
+
+=========================
+Write a program to find the count of maximum occuring character in a string. Constraints: 0 < String length < 100 Example: Input: Hello World Output: 3 Explanation: This program allows the user to enter a string (or character array). Next, it will find the maximum occurring character (most repeated character) inside a string.
+
+def find_max_char_count(string):
+  """
+  Finds the count of the maximum occurring character in a string.
+
+  Args:
+    string: The input string.
+
+  Returns:
+    The count of the most frequent character.
+  """
+
+  char_counts = {}  # Use a dictionary to store character counts
+  for char in string:
+    char_counts[char] = char_counts.get(char, 0) + 1  # Count occurrences
+
+  max_char = None
+  max_count = 0
+  for char, count in char_counts.items():
+    if count > max_count:
+      max_char = char
+      max_count = count
+
+  return max_count
+
+# Get input from the user
+string = input("Enter a string: ")
+
+# Find and print the maximum character count
+max_count = find_max_char_count(string)
+print("Maximum character count:", max_count)
+=======================================
+Write a program to find Absolute difference between number of vowels and consonants in a given string. Constraints: 0 < string length < 100 Example: Input: instacks Output: 4 1<=|S|<=105 1<=|pat|<|S| Input 1: batmanandrobinarebat bat output: 1 18 Explanation: • The string "instacks" has 2 vowels ('i', 'a') and 6 consonants ('n', 's', 't', 'c', 'k', 's'). • The absolute difference between the number of vowels and consonants is ∣2−6∣=4∣2−6∣=4, which is the output
+
+VOWELS = "aeiouAEIOU"
+
+def find_vowel_consonant_diff(string):
+  """
+  Finds the absolute difference between the number of vowels and consonants in a string.
+
+  Args:
+    string: The input string.
+
+  Returns:
+    The absolute difference between vowel and consonant counts.
+
+  Raises:
+    ValueError: If the string length is not within the specified range.
+  """
+
+  if not 0 < len(string) < 100:
+    raise ValueError("String length must be between 0 and 100.")
+
+  vowel_count = sum(1 for char in string if char in VOWELS)
+  consonant_count = len(string) - vowel_count
+
+  return abs(vowel_count - consonant_count)
+
+# Example usage
+string = "instacks"
+diff = find_vowel_consonant_diff(string)
+print(f"Absolute difference between vowels and consonants: {diff}")
+
+========================================
+Write a Python program to convert a list into a nested dictionary of keys. Input: 4 12 14 15 16 Output: {12: {14: {15: {16: {}}}}}
+
+def list_to_nested_dict(lst):
+  """Converts a list into a nested dictionary of keys.
+
+  Args:
+    lst: The input list containing numbers.
+
+  Returns:
+    A nested dictionary where each number is a key to an empty dictionary.
+  """
+
+  nested_dict = {}
+  for num in reversed(lst):  # Iterate in reverse to build nested structure
+    nested_dict = {num: nested_dict}  # Create nested dictionary layers
+  return nested_dict
+
+# Example usage
+lst = [4, 12, 14, 15, 16]
+nested_dict = list_to_nested_dict(lst)
+print(nested_dict)  # Output: {12: {14: {15: {16: {}}}}}
+
+==============================================
+Write a program to generate and print a dictionary that contains a number (between 1 and n) in square form. Constraints: n>0 Example: I/p: 5 O/p: {1:1,2:4,3:9,4:16,5:25} Explanation: I/p: Take the input as integer from the user O/p: For that we have to print in dictioanary as key from the number and the value as its square.
+
+def num_to_square_dict(n):
+  """
+  Generates a dictionary with numbers as keys and their squares as values.
+
+  Args:
+    n: The upper limit for the numbers (inclusive).
+
+  Returns:
+    A dictionary containing numbers and their squares.
+
+  Raises:
+    ValueError: If n is not a positive integer.
+  """
+
+  if not isinstance(n, int) or n <= 0:
+    raise ValueError("n must be a positive integer.")
+
+  return {num: num**2 for num in range(1, n + 1)}  # Use dictionary comprehension
+
+# Example usage
+n = 5
+square_dict = num_to_square_dict(n)
+print(square_dict)  # Output: {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+====================================
+write a program to accept a string and print an individual sub-string with its length. Example: Input: hello buddy Output: hello 5 buddy 5
+
+def print_substrings_with_lengths(text):
+  """
+  Prints each substring of a string along with its length.
+
+  Args:
+    text: The input string.
+  """
+
+  for i in range(len(text)):
+    for j in range(i + 1, len(text) + 1):
+      substring = text[i:j]
+      print(f"{substring} {len(substring)}")
+
+# Example usage
+text = "hello buddy"
+print_substrings_with_lengths(text)
+
+=====================================
+Write a program to display the missing number in a consecutive 1 to n numbers in a list Example: Input: 10 1 2 3 4 5 6 8 9 10 Output: 7 Input: 1 2 3 4 6 7 8 9 9 Output: 5 Explanation: 1st line of the input is 1 to 9 consecutive numbers with one missing number 1st line of the output is that 1 missing number in that list
+
+def find_missing_number(data):
+   """
+   Finds the missing number in a list of consecutive numbers.
+
+   Args:
+       data: A list of integers representing the consecutive numbers (with one missing).
+
+   Returns:
+       The missing number in the list.
+
+   Raises:
+       ValueError: If the list is empty or contains non-consecutive numbers.
+   """
+
+   if not data:
+       raise ValueError("List cannot be empty.")
+
+   # Check if the list contains consecutive numbers
+   expected_sum = (len(data) + 1) * (len(data) // 2)
+   actual_sum = sum(data)
+   if expected_sum != actual_sum:
+       raise ValueError("List must contain consecutive numbers.")
+
+   # Calculate and return the missing number
+   return expected_sum - actual_sum
+
+# Example usage
+data1 = [1, 2, 3, 4, 5, 6, 8, 9, 10]
+data2 = [1, 2, 3, 4, 6, 7, 8, 9, 9]
+
+try:
+ missing_number1 = find_missing_number(data1)
+ print(f"Missing number in data1: {missing_number1}")
+except ValueError as e:
+ print(f"Error for data1: {e}")
+
+try:
+ missing_number2 = find_missing_number(data2)
+ print(f"Missing number in data2: {missing_number2}")
+except ValueError as e:
+ print(f"Error for data2: {e}")
+========================================================
+Write a program to create a new string made of the middle three characters of an input string Input: Annamacharya Output: ach Explanation: Get the middle character’s index using x = len(str1) /2. Use string slicing to get the middle three characters starting from the middle index to the next two character str1[middle_index-1:middle_index+2]
+
+def get_middle_three_chars(text):
+  """
+  Extracts and returns the middle three characters of a string.
+
+  Args:
+    text: The input string.
+
+  Returns:
+    The middle three characters of the string, or an empty string if the length is less than 3.
+  """
+
+  if len(text) < 3:
+    return ""
+
+  # Calculate the middle index (rounded down for even lengths)
+  middle_index = len(text) // 2
+
+  # Extract and return the middle three characters
+  return text[middle_index - 1:middle_index + 2]
+
+# Example usage
+text = "Annamacharya"
+middle_chars = get_middle_three_chars(text)
+print(f"Middle three characters of '{text}': {middle_chars}")  # Output: ach
+
+=====================================
+Write a Code to Read and print given string's even indexed character in Uppercase and remaining it should be same. Input: JhansiRani Output: JhAnSiRaNi
+
+def print_alternate_case(text):
+  """
+  Prints the given string with even indexed characters in uppercase and odd indexed characters unchanged.
+
+  Args:
+    text: The input string.
+  """
+
+  output = ""
+  for i, char in enumerate(text):
+    if i % 2 == 0:
+      output += char.upper()
+    else:
+      output += char
+
+  print(output)
+
+# Example usage
+text = "JhansiRani"
+print_alternate_case(text)  # Output: JhAnSiRaNi
+
+=============================================
+
+You have a non-empty set s, and you have to execute N commands given in N
+lines.
+The commands will be pop, remove and discard.
+Input format: 
+The first line contains integer n, the number of elements in the set s.
+The second line contains n space separated elements of set s. All of the elements 
+are non-negative integers, less than or equal to 9.
+Output format:
+Print the sum of the elements of set s on a single line.
+Constraints: 
+0<n<20
+Input: 
+5
+11 23 12 12 25
+3
+remove 11
+pop
+discard 25
+Output: 
+35
+Explanation: 
+After completing these 10 operations on the set, we get set([4]). Hence, the sum is 
+4.
+
+def execute_set_commands(n, operations):
+   """
+   Executes set commands on a given set and returns the sum of its elements.
+
+   Args:
+       n: The number of elements in the set.
+       operations: A list of strings representing the commands to execute.
+
+   Returns:
+       The sum of the elements in the set after executing the commands.
+   """
+
+   # Create the set with elements
+   s = set(map(int, input().split()))
+
+   # Execute each command
+   for _ in range(n):
+       command, *args = input().split()
+       if command == "pop":
+           s.pop()  # Remove and return an arbitrary element
+       elif command == "remove":
+           try:
+               s.remove(int(args[0]))  # Raise KeyError if not found
+           except KeyError:
+               pass  # Ignore if element is not in the set
+       elif command == "discard":
+           s.discard(int(args[0]))  # Silently remove if present
+       else:
+           raise ValueError("Invalid command")
+
+   # Calculate and return the sum of elements
+   return sum(s)
+
+# Get input values
+n = int(input())
+
+# Get set elements
+elements = input().split()
+
+# Get number of operations
+num_operations = int(input())
+
+# Get operations
+operations = []
+for _ in range(num_operations):
+   operations.append(input())
+
+# Execute commands and print the sum
+result = execute_set_commands(num_operations, operations)
+print(result)
+
+====================================================
+Write a python program to check if a given string is a palindrome or not Example 1: input: malayalam output: Given string is a Palindrome Example 2: input: pillow output: Given string is not a Palindrome
+
+def is_palindrome(text):
+  """
+  Checks if a string is a palindrome (reads the same backward and forward).
+
+  Args:
+    text: The string to check.
+
+  Returns:
+    True if the string is a palindrome, False otherwise.
+  """
+
+  cleaned_text = "".join(char.lower() for char in text if char.isalnum())  # Remove non-alphanumeric characters
+  return cleaned_text == cleaned_text[::-1]  # Check if reversed string is the same
+
+# Example usage
+text1 = "malayalam"
+text2 = "pillow"
+
+print(f"'{text1}' is a palindrome: {is_palindrome(text1)}")
+print(f"'{text2}' is a palindrome: {is_palindrome(text2)}")
+
+==========================================
+Write a program to find the sum of elements in the two diagonals of a matrix. Constraints: Take X shape placed elements Example 1: input: 3 6 9 5 10 15 4 8 12 output: 48
+
+def diagonal_sum(matrix):
+  """
+  Calculates the sum of elements in the two diagonals of a matrix.
+
+  Args:
+    matrix: A 2D list representing the matrix.
+
+  Returns:
+    The sum of elements in both diagonals.
+
+  Raises:
+    ValueError: If the matrix is not square.
+  """
+
+  if len(matrix) != len(matrix[0]):
+    raise ValueError("Matrix must be square.")
+
+  # Calculate the sum of the main diagonal
+  main_diagonal_sum = sum(matrix[i][i] for i in range(len(matrix)))
+
+  # Calculate the sum of the secondary diagonal
+  secondary_diagonal_sum = sum(matrix[i][len(matrix) - 1 - i] for i in range(len(matrix)))
+
+  return main_diagonal_sum + secondary_diagonal_sum
+
+# Example usage
+matrix = [[3, 6, 9],
+         [5, 10, 15],
+         [4, 8, 12]]
+
+diagonal_sum_result = diagonal_sum(matrix)
+print(f"Sum of diagonals: {diagonal_sum_result}")  # Output: 48
+
+====================================================
+Write a program to print substrings in a given strings Constraints: Every single element is substrings and every sequel element is substring and finally the actual string is also substring. Example: input: “ABCD” Output: A AB ABC ABCD B BC BCD C CD D
+
+def print_all_substrings(text):
+    """
+    Prints all substrings of a given string, including single characters and the entire string.
+
+    Args:
+        text: The input string.
+    """
+
+    for i in range(len(text)):
+        for j in range(i + 1, len(text) + 1):
+            substring = text[i:j]
+            print(substring)
+
+# Example usage
+text = "ABCD"
+print_all_substrings(text)
+==============================================
+
